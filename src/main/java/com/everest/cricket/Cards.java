@@ -12,11 +12,19 @@ public class Cards {
     public static final List<String> BATTING_CARDS = new ArrayList<>(List.of("straight", "flick", "leglance", "long-on", "square-cut", "sweep", "cover-drive", "pull", "scoop", "uppercut"));
     public static final List<String> SHOT_TIMING = new ArrayList<>(List.of("perfect", "good", "early", "late"));
 
-    public static Map<Integer, List<Integer>> parseConfig(){
+    public static Map<Integer, List<Integer>> parseConfig() {
         Yaml yaml = new Yaml();
         InputStream inputStream = Cards.class
                 .getClassLoader()
                 .getResourceAsStream("config.yaml");
+        return yaml.load(inputStream);
+    }
+
+    public static Map<Integer, List<String>> parseCommentaryConfig() {
+        Yaml yaml = new Yaml();
+        InputStream inputStream = Cards.class
+                .getClassLoader()
+                .getResourceAsStream("commentary-config.yaml");
         return yaml.load(inputStream);
     }
 }
