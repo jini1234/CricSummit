@@ -2,15 +2,12 @@ package com.everest.cricket;
 
 import com.everest.cricket.util.RandomUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.*;
 
 public class Game {
     private static final List<List<Integer>> scores = new ArrayList<>(List.of(List.of(-1), List.of(0), List.of(1, 2), List.of(3, 5), List.of(4, 6)));
     private static final int maxMultiple = Cards.BATTING_CARDS.size() * Cards.SHOT_TIMING.size();
+    public static final Random random = new Random();
     private final Map<Integer, List<Integer>> configMap;
     private final Map<Integer, List<String>> commentaryMap;
     private final Map<Integer, List<Integer>> multipleToScoreMap;
@@ -42,12 +39,11 @@ public class Game {
         int finalScore = randomlySelectScoreFromMostProbableScores(mostProbableScores);
         String commentary = randomlySelectCommentary(finalScore);
         return parseFinalScore(finalScore, commentary);
-
     }
 
     private String randomlySelectCommentary(int finalScore) {
         List<String> commentary = this.commentaryMap.get(finalScore);
-        return commentary.get(ThreadLocalRandom.current().nextInt(0, commentary.size()));
+        return commentary.get(getRandomInRange(0, commentary.size()));
     }
 
     private String parseFinalScore(int finalScore, String commentary) {
@@ -62,7 +58,7 @@ public class Game {
         if (mostProbableScores.size() == 1) {
             return mostProbableScores.get(0);
         }
-        return mostProbableScores.get(ThreadLocalRandom.current().nextInt(0, mostProbableScores.size()));
+        return mostProbableScores.get(getRandomInRange(0, mostProbableScores.size()));
     }
 
     private List<Integer> calculateProbableScoreForMultiple(int multiple) {
@@ -87,8 +83,23 @@ public class Game {
         return this.multipleToScoreMap.get(keys.get(random.getOneRandom()));
     }
 
+    /**
+     * This will return number by multiplying batting_index with timing_index
+     **/
     private int getMultiple(int bowlIndex, int batIndex, int timingIndex) {
         List<Integer> preferredBattingIndexes = this.configMap.get(bowlIndex);
-        return (Cards.BATTING_CARDS.size() - preferredBattingIndexes.indexOf(batIndex)) * (Cards.SHOT_TIMING.size() - timingIndex);
+        return calculateBattingIndex(batIndex, preferredBattingIndexes) * calculateTimingIndex(timingIndex);
+    }
+
+    private int calculateTimingIndex(int timingIndex) {
+        return Cards.SHOT_TIMING.size() - timingIndex;
+    }
+
+    private int calculateBattingIndex(int batIndex, List<Integer> preferredBattingIndexes) {
+        return Cards.BATTING_CARDS.size() - preferredBattingIndexes.indexOf(batIndex);
+    }
+
+    public int getRandomInRange(int min, int max) {
+        return random.nextInt(max - min) + min;
     }
 }

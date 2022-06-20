@@ -24,21 +24,48 @@ result counts and assert with expected probability.
 ### Example Run
 
 ```
-8 //No of inputs
+Enter '1' for normal play and '2' for Super Over
+1
+Enter No. of inputs
+10
+Enter inputs in format: 'bowl-type, bat-type, timing'
 yorker straight good
-4 runs, A gentle shuffle and a clip, four for the taking
+6 runs, Shot!, Over the long on
 bouncer pull perfect
-5 runs, Huge wide, keeper misses and 4 byes
+2 runs, In the gap that will be 2 runs.
 slower-ball sweep early
-1 runs, Edged and taken.
+4 runs, A gentle shuffle and a clip, four for the taking
 bouncer scoop late
-0 runs, In the block hole, no run.
-out-swinger flick good
-4 runs, A misfield and a boundary
-pace leglance good
 1 wicket, Straight Down the Fielder's Throat, and he is out.
-yorker straight perfect
-6 runs, SIX runs, Elegant hit
-doosra long-on good
+out-swinger flick good
 0 runs, Defended, no run.
+pace leglance good
+3 runs, Fielder saving the boundary there, 3 runs.
+yorker straight perfect
+3 runs, Fielder saving the boundary there, 3 runs.
+doosra long-on good
+6 runs, That has taken the aerial route, and a Six!
+bouncer scoop perfect
+2 runs, That's a Proper Cricket Shot. A couple.
+slower-ball sweep late
+2 runs, In the gap that will be 2 runs.
+```
+
+### SuperOver
+
+```
+Enter '1' for normal play and '2' for Super Over
+2
+Bowling cards: [inswinger, yorker, off-cutter, out-swinger, pace, out-swinger]
+India 11 Score:
+5 runs (Target Runs: 6 )
+Wickets Available: 2
+Enter inputs in format: 'bat-type, timing'
+straight perfect
+3 runs, Dropped!, That's gonna cost them, 3 runs.
+Enter inputs in format: 'bat-type, timing'
+straight perfect
+4 runs, A gentle shuffle and a clip, four for the taking
+Australia won by 2 wicket
+Australia scored: 7 runs
 ```
